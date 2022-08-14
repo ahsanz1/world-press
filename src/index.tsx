@@ -4,9 +4,12 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import Header from "./components/header";
+import Footer from "./components/footer";
 import AboutUsPage from "./pages/about-us";
+import ArticlePage from "./pages/article";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -18,6 +21,10 @@ root.render(
       <Routes>
         <Route path="/" element={<App />}></Route>
         <Route path="/about-us" element={<AboutUsPage />}></Route>
+        <Route
+          path="/news-article/:articleId"
+          element={<ArticlePage />}
+        ></Route>
       </Routes>
       <Footer></Footer>
     </BrowserRouter>

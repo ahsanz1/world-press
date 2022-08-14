@@ -5,7 +5,9 @@ module.exports = {
     extend: {
       colors: {
         "black-bg": "#333",
-        "light-grey": "#f5f5f5",
+        "light-grey": "#f0f0f0",
+        "lightest-grey-bg": "#f5f5f5",
+        "custom-orange": "#e09d37",
       },
       letterSpacing: {
         "custom-widest": "0.6em",

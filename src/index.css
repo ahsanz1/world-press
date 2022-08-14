@@ -9,6 +9,28 @@ code {
   font-family: "Merriweather", serif;
 }
 
+.slick-next {
+  right: 25px !important;
+  z-index: 11;
+}
+
+.slick-prev {
+  left: 25px !important;
+  z-index: 1;
+}
+
+.slick-slider {
+  line-height: 0 !important;
+}
+
+.slick-slide {
+  visibility: hidden;
+  height: unset !important;
+}
+.slick-slide.slick-active {
+  visibility: visible;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
