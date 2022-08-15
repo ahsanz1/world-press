@@ -8,8 +8,9 @@ import Header from "./components/header";
 import Footer from "./components/footer";
 import AboutUsPage from "./pages/about-us";
 import ArticlePage from "./pages/article";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { ContextProvider } from "./lib/context";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -17,16 +18,18 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Header></Header>
-      <Routes>
-        <Route path="/" element={<App />}></Route>
-        <Route path="/about-us" element={<AboutUsPage />}></Route>
-        <Route
-          path="/news-article/:articleId"
-          element={<ArticlePage />}
-        ></Route>
-      </Routes>
-      <Footer></Footer>
+      <ContextProvider>
+        <Header></Header>
+        <Routes>
+          <Route path="/" element={<App />}></Route>
+          <Route path="/about-us" element={<AboutUsPage />}></Route>
+          <Route
+            path="/news-article/:articleId"
+            element={<ArticlePage />}
+          ></Route>
+        </Routes>
+        <Footer></Footer>
+      </ContextProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

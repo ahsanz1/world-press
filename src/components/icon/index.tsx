@@ -5,6 +5,9 @@ interface IconProps {
   srcOnHover?: string;
   alt?: string;
   className?: string;
+  text?: string;
+  textClassName?: string;
+  imgClassName?: string;
 }
 
 export const Icon: React.FC<IconProps> = ({
@@ -12,16 +15,22 @@ export const Icon: React.FC<IconProps> = ({
   srcOnHover,
   alt,
   className,
+  text,
+  textClassName,
+  imgClassName,
 }) => (
-  <img
-    src={src}
-    alt={alt}
-    onMouseOver={(e): void => {
-      srcOnHover && (e.currentTarget.src = srcOnHover);
-    }}
-    onMouseOut={(e): void => {
-      srcOnHover && (e.currentTarget.src = src || "");
-    }}
-    className={className}
-  />
+  <span className={className}>
+    {text ? <p className={textClassName}>{text}</p> : ""}
+    <img
+      src={src}
+      alt={alt}
+      onMouseOver={(e): void => {
+        srcOnHover && (e.currentTarget.src = srcOnHover);
+      }}
+      onMouseOut={(e): void => {
+        srcOnHover && (e.currentTarget.src = src || "");
+      }}
+      className={imgClassName}
+    />
+  </span>
 );

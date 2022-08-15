@@ -43,25 +43,25 @@ const Header = () => {
             src={InstagramIcon}
             srcOnHover={InstagramIconOrange}
             alt="instagram"
-            className="w-6 h-6"
+            imgClassName="w-6 h-6"
           ></Icon>
           <Icon
             src={FBIcon}
             srcOnHover={FBIconOrange}
             alt="fb"
-            className="w-6 h-6"
+            imgClassName="w-6 h-6"
           ></Icon>
           <Icon
             src={InIcon}
             srcOnHover={InIconOrange}
             alt="in"
-            className="w-6 h-6"
+            imgClassName="w-6 h-6"
           ></Icon>
           <Icon
             src={TwitterIcon}
             srcOnHover={TwitterIconOrange}
             alt="twitter"
-            className="w-6 h-6"
+            imgClassName="w-6 h-6"
           ></Icon>
         </div>
         <img

@@ -1,17 +1,18 @@
 import axios, { AxiosError } from "axios";
 import { ENDPOINTS } from "./endpoints";
 
-const BASE_URL = process.env.REACT_APP_NEWS_API_BASE_URL;
-const API_KEY = process.env.REACT_APP_NEWS_API_KEY;
-const SERVER_BASE_URL = process.env.REACT_APP_SERVER_BASE_URL;
+const SERVER_BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? process.env.REACT_APP_SERVER_BASE_URL
+    : "http://localhost:8080";
 
 export const fetchTopHeadlines = async (params: string) => {
   try {
     const topHeadlinesRes = await axios.get(
-      `${BASE_URL}${ENDPOINTS.TOP_HEADLINES}?${params}`,
+      `${SERVER_BASE_URL}${ENDPOINTS.TOP_HEADLINES}`,
       {
-        headers: {
-          Authorization: `Bearer ${API_KEY}`,
+        params: {
+          paramString: params,
         },
       }
     );
@@ -25,13 +26,14 @@ export const fetchTopHeadlines = async (params: string) => {
 export const fetchCompleteArticle = async (url: string) => {
   try {
     const articleHtmlRes = await axios.get(
-      `${SERVER_BASE_URL}${ENDPOINTS.COMPLETE_ARTICLE}`,
+      `${"http://localhost:8080"}${ENDPOINTS.COMPLETE_ARTICLE}`,
       {
         params: {
           url: url,
         },
       }
     );
+
     // console.log("Article Html: ", articleHtmlRes.data);
     return articleHtmlRes.data;
   } catch (error) {
