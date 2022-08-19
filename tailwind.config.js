@@ -15,6 +15,9 @@ module.exports = {
       textColor: {
         "text-light-grey-cm": "#c5c5c5",
       },
+      width: {
+        "30pc-cm": "30%",
+      },
     },
   },
   plugins: [],

@@ -27,12 +27,21 @@ const getCountryLS = () => {
   return country;
 };
 
+const getSelectedAuthorGenderLS = () => {
+  const authorGender = window.localStorage.getItem("selected-author-gender");
+  if (!authorGender) return "";
+  return authorGender;
+};
+
 export const ContextProvider = ({ children }: any) => {
   const [topHeadlines, setTopHeadlines] = useState<HeadlineArticleType[]>(
     getTopHeadlinesLS()
   );
   const [newsDate, setNewsDate] = useState<string>(getNewsDateLS());
   const [country, setCountry] = useState<string>(getCountryLS());
+  const [selectedAuthorGender, setSelectedAuthorGender] = useState<string>(
+    getSelectedAuthorGenderLS()
+  );
 
   useEffect(() => {
     if (topHeadlines.length > 0) {
@@ -55,6 +64,15 @@ export const ContextProvider = ({ children }: any) => {
     }
   }, [country]);
 
+  useEffect(() => {
+    if (selectedAuthorGender) {
+      window.localStorage.setItem(
+        "selected-author-gender",
+        selectedAuthorGender
+      );
+    }
+  }, [selectedAuthorGender]);
+
   return (
     <AppContext.Provider
       value={{
@@ -64,6 +82,8 @@ export const ContextProvider = ({ children }: any) => {
         setNewsDate,
         country,
         setCountry,
+        selectedAuthorGender,
+        setSelectedAuthorGender,
       }}
     >
       {children}

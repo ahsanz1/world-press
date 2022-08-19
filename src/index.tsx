@@ -11,6 +11,7 @@ import ArticlePage from "./pages/article";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { ContextProvider } from "./lib/context";
+import AuthorPage from "./pages/author";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -27,6 +28,7 @@ root.render(
             path="/news-article/:articleId"
             element={<ArticlePage />}
           ></Route>
+          <Route path="/author/:authorName" element={<AuthorPage />}></Route>
         </Routes>
         <Footer></Footer>
       </ContextProvider>

@@ -28,14 +28,16 @@ const Header = () => {
           </Link>
         </div>
       </div>
-      <div className="navbar flex flex-row justify-between px-4 py-3 bg-neutral-100 w-full items-center border-b-2 lg:px-6">
+      <div className="navbar flex flex-row justify-between px-4 py-3 bg-light-grey w-full items-center border-b-2 lg:px-6">
         <Link to="/">
           <p className="font-bold text-3xl leading-tight">World Press</p>
         </Link>
         <div className="hidden lg:flex flex-row justify-between gap-x-10 text-lg font-medium">
           <p className="hover:text-custom-orange">Home Page</p>
           <p className="hover:text-custom-orange">Simple Post</p>
-          <p className="hover:text-custom-orange">About Us</p>
+          <Link to={"/about-us"}>
+            <p className="hover:text-custom-orange">About Us</p>
+          </Link>
           <p className="hover:text-custom-orange">Blog</p>
         </div>
         <div className="hidden lg:flex flex-row justify-between gap-x-6 text-lg font-medium">
