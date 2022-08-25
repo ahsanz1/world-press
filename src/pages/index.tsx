@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import HeadlineBanner from "../components/headline-banner";
 import { fetchTopHeadlines } from "../lib/api";
 import { HeadlineArticleType } from "../lib/types/common";
@@ -14,16 +14,49 @@ const HomePage = () => {
     topHeadlines = [],
     setTopHeadlines,
     newsDate,
+    entertainmentNews,
+    setEntertainmentNews,
+    technologyNews,
+    setTechnologyNews,
+    sportsNews,
+    setSportsNews,
+    selectedCountry,
   } = useContext(AppContext);
+
   useEffect(() => {
     if (new Date().toDateString() !== newsDate || topHeadlines.length === 0) {
-      fetchTopHeadlines("country=us&pageSize=100").then((headlines) => {
-        const headlinesWithAIds = embedArticleIds(headlines);
-        console.log("headlines", headlinesWithAIds);
-        setTopHeadlines(headlinesWithAIds);
-      });
+      fetchTopHeadlines(`country=${selectedCountry}&pageSize=100`)
+        .then((headlines) => {
+          const headlinesWithAIds = embedArticleIds(headlines);
+          setTopHeadlines(headlinesWithAIds);
+        })
+        .then(() => {
+          fetchTopHeadlines(
+            `country=${selectedCountry}&pageSize=5&category=entertainment`
+          )
+            .then((news) => {
+              const newsWithAIds = embedArticleIds(news);
+              setEntertainmentNews(newsWithAIds);
+            })
+            .then(() => {
+              fetchTopHeadlines(
+                `country=${selectedCountry}&pageSize=5&category=technology`
+              ).then((news) => {
+                const newsWithAIds = embedArticleIds(news);
+                setTechnologyNews(newsWithAIds);
+              });
+            })
+            .then(() => {
+              fetchTopHeadlines(
+                `country=${selectedCountry}&pageSize=5&category=sports`
+              ).then((news) => {
+                const newsWithAIds = embedArticleIds(news);
+                setSportsNews(newsWithAIds);
+              });
+            });
+        });
     }
-  }, []);
+  }, [selectedCountry]);
 
   return (
     <div className="flex flex-col w-full">
@@ -36,24 +69,30 @@ const HomePage = () => {
           ))}
         </Slider>
       </div>
-      <div className="flex flex-col px-4 mt-4 lg:flex-row gap-x-8">
+      <div className="flex flex-col px-4 my-12 lg:flex-row gap-x-8">
         <CategoryNews
           circularImages={false}
-          categoryTitle={"Most Viewed"}
-          articles={topHeadlines.slice(1, 4)}
+          categoryTitle={"Entertainment"}
+          articles={entertainmentNews}
           className="lg:w-30pc-cm"
+          topDescription="Latest entertainment news and gossip from the world of bollywood, Hollywood and regional film industries. Get the latest celebrity news on celebrity scandals, engagements, and divorces."
+          page="home"
         />
         <CategoryNews
           circularImages={false}
-          categoryTitle={"Most Viewed"}
-          articles={topHeadlines.slice(5, 8)}
+          categoryTitle={"Technology"}
+          articles={technologyNews}
           className="lg:w-2/5 border-x-2 border-black px-8"
+          topDescription="The latest tech news about the world's best (and sometimes worst) hardware, apps, and much more."
+          page="home"
         />
         <CategoryNews
           circularImages={false}
-          categoryTitle={"Most Viewed"}
-          articles={topHeadlines.slice(9, 12)}
+          categoryTitle={"Sports"}
+          articles={sportsNews}
           className="lg:w-30pc-cm"
+          topDescription="Latest sports news from around the world with in-depth analysis, features, photos and videos covering football, tennis, motorsport, golf, rugby, sailing, skiing, horse racing and equestrian."
+          page="home"
         />
       </div>
     </div>

@@ -8,6 +8,8 @@ module.exports = {
         "light-grey": "#f0f0f0",
         "lightest-grey-bg": "#f5f5f5",
         "custom-orange": "#e09d37",
+        "custom-greeen": "#333f35",
+        "custom-faded-green": "#404a41",
       },
       letterSpacing: {
         "custom-widest": "0.6em",
@@ -17,6 +19,12 @@ module.exports = {
       },
       width: {
         "30pc-cm": "30%",
+      },
+      fontSize: {
+        "big-text": "228px",
+      },
+      borderWidth: {
+        thin: "1px",
       },
     },
   },

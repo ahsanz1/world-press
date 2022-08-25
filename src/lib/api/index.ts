@@ -7,6 +7,7 @@ const SERVER_BASE_URL =
     : "http://localhost:8080";
 const GENDER_API_BASE_URL = process.env.REACT_APP_GENDER_API_BASE_URL;
 const GENDER_API_KEY = process.env.REACT_APP_GENDER_API_KEY;
+const COUNTRIES_BASE_URL = process.env.REACT_APP_COUNTRIES_BASE_URL;
 
 export const fetchTopHeadlines = async (params: string) => {
   try {
@@ -66,5 +67,16 @@ export const fetchAuthorArticles = async (authorName: string) => {
   } catch (error) {
     console.log("Could not fetch author articles: ", error);
     return [];
+  }
+};
+
+export const fetchCountry = async (code: string) => {
+  try {
+    const countryRes = await axios.get(
+      `${COUNTRIES_BASE_URL}${ENDPOINTS.GET_COUNTRIES}/${code}`
+    );
+    return countryRes?.data[0] || null;
+  } catch (error) {
+    console.log("Error fetching country: ", code, error);
   }
 };

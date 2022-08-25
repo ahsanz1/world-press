@@ -33,6 +33,7 @@ export type CategoryNewsProps = {
   addTopBorder?: boolean;
   topDescription?: string;
   className?: string;
+  page?: string;
 };
 
 export type HorizontalCardProps = {
@@ -49,4 +50,26 @@ export type ParagraphsCardProps = {
   heading?: string;
   para1?: string;
   para2?: string;
+};
+
+export type SectionOverlayProps = {
+  overlayImgUrl?: string;
+  bigText?: string;
+  heading1?: string;
+  para1?: string;
+  heading2?: string;
+  para2?: string;
+};
+
+export type DropdownProps = {
+  items: any[];
+  onSelect: Function;
+  className: string;
+  itemsClassName?: string;
+};
+
+export type MobileMenuProps = {
+  setShowMobileMenu: Function;
+  allCountries: any[];
+  setSelectedCountry: Function;
 };

@@ -8,17 +8,18 @@ const CategoryNews = ({
   circularImages,
   topDescription,
   className,
+  page,
 }: CategoryNewsProps) => {
   return (
     <div className={`flex flex-col w-full text-left b-3 ${className}`}>
       <h5 className="font-bold text-lg pb-5">{categoryTitle}</h5>
       {topDescription && <p className="text-base">{topDescription}</p>}
-      {articles.map((article) => (
+      {articles.map((article, idx) => (
         <ArticleCard
           circularImage={circularImages}
           newsArticle={article}
           key={article.title}
-          addTopBorder={true}
+          addTopBorder={page !== "home" || idx > 0}
         />
       ))}
     </div>

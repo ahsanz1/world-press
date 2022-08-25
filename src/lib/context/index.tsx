@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { fetchTopHeadlines } from "../api";
 import { HeadlineArticleType } from "../types/common";
 
 export const AppContext = React.createContext<any>({});
@@ -21,16 +20,32 @@ const getNewsDateLS = () => {
   return nDate;
 };
 
-const getCountryLS = () => {
-  const country = window.localStorage.getItem("country");
-  if (!country) return "";
-  return country;
-};
-
 const getSelectedAuthorGenderLS = () => {
   const authorGender = window.localStorage.getItem("selected-author-gender");
   if (!authorGender) return "";
   return authorGender;
+};
+
+const getEntertainmentNewsLS = () => {
+  const news = window.localStorage.getItem("entertainment-news");
+  if (!news) return [];
+  return JSON.parse(news);
+};
+const getTechnologyNewsLS = () => {
+  const news = window.localStorage.getItem("technology-news");
+  if (!news) return [];
+  return JSON.parse(news);
+};
+const getSportsNewsLS = () => {
+  const news = window.localStorage.getItem("sports-news");
+  if (!news) return [];
+  return JSON.parse(news);
+};
+
+const getSelectedCountryLS = () => {
+  const sc = window.localStorage.getItem("selected-country");
+  if (!sc) return "us";
+  return sc;
 };
 
 export const ContextProvider = ({ children }: any) => {
@@ -38,9 +53,21 @@ export const ContextProvider = ({ children }: any) => {
     getTopHeadlinesLS()
   );
   const [newsDate, setNewsDate] = useState<string>(getNewsDateLS());
-  const [country, setCountry] = useState<string>(getCountryLS());
   const [selectedAuthorGender, setSelectedAuthorGender] = useState<string>(
     getSelectedAuthorGenderLS()
+  );
+  const [entertainmentNews, setEntertainmentNews] = useState<
+    HeadlineArticleType[]
+  >(getEntertainmentNewsLS());
+  const [sportsNews, setSportsNews] = useState<HeadlineArticleType[]>(
+    getSportsNewsLS()
+  );
+  const [technologyNews, setTechnologyNews] = useState<HeadlineArticleType[]>(
+    getTechnologyNewsLS()
+  );
+
+  const [selectedCountry, setSelectedCountry] = useState<string>(
+    getSelectedCountryLS()
   );
 
   useEffect(() => {
@@ -59,10 +86,10 @@ export const ContextProvider = ({ children }: any) => {
   }, [newsDate]);
 
   useEffect(() => {
-    if (country) {
-      window.localStorage.setItem("country", country);
+    if (selectedCountry) {
+      window.localStorage.setItem("selected-country", selectedCountry);
     }
-  }, [country]);
+  }, [selectedCountry]);
 
   useEffect(() => {
     if (selectedAuthorGender) {
@@ -73,6 +100,30 @@ export const ContextProvider = ({ children }: any) => {
     }
   }, [selectedAuthorGender]);
 
+  useEffect(() => {
+    if (entertainmentNews.length > 0) {
+      window.localStorage.setItem(
+        "entertainment-news",
+        JSON.stringify(entertainmentNews)
+      );
+    }
+  }, [entertainmentNews]);
+
+  useEffect(() => {
+    if (technologyNews.length > 0) {
+      window.localStorage.setItem(
+        "technology-news",
+        JSON.stringify(technologyNews)
+      );
+    }
+  }, [technologyNews]);
+
+  useEffect(() => {
+    if (sportsNews.length > 0) {
+      window.localStorage.setItem("sports-news", JSON.stringify(sportsNews));
+    }
+  }, [sportsNews]);
+
   return (
     <AppContext.Provider
       value={{
@@ -80,10 +131,16 @@ export const ContextProvider = ({ children }: any) => {
         setTopHeadlines,
         newsDate,
         setNewsDate,
-        country,
-        setCountry,
         selectedAuthorGender,
         setSelectedAuthorGender,
+        entertainmentNews,
+        setEntertainmentNews,
+        technologyNews,
+        setTechnologyNews,
+        sportsNews,
+        setSportsNews,
+        selectedCountry,
+        setSelectedCountry,
       }}
     >
       {children}

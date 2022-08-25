@@ -11,20 +11,24 @@ const ArticlePage = () => {
   const [newsArticle, setNewsArticle] = useState<HeadlineArticleType>({});
   const [completeArticleContent, setCompleteArticleContent] =
     useState<string>("");
-  const { topHeadlines } = useContext(AppContext);
+  const { topHeadlines, entertainmentNews, technologyNews, sportsNews } =
+    useContext(AppContext);
   const { articleId = "" } = useParams();
 
   useEffect(() => {
-    if (topHeadlines.length > 0) {
-      const foundArticle = topHeadlines.find((article: HeadlineArticleType) =>
-        (article.url || "").includes(articleId)
-      );
-      if (foundArticle) {
-        setNewsArticle(foundArticle);
-      } else {
-        setNewsArticle({ title: "Article not found" });
-      }
-    } else setNewsArticle({ title: "Article not found" });
+    const allArticles = topHeadlines
+      .concat(entertainmentNews)
+      .concat(technologyNews)
+      .concat(sportsNews);
+    const foundArticle = allArticles.find((article: HeadlineArticleType) =>
+      (article.url || "").includes(articleId)
+    );
+
+    if (foundArticle) {
+      setNewsArticle(foundArticle);
+    } else {
+      setNewsArticle({ title: "Article not found" });
+    }
   }, []);
 
   useEffect(() => {

@@ -1,6 +1,7 @@
 import React from "react";
 import HorizontalCard from "../components/horizontal-card";
 import ParagraphsCard from "../components/paragraphs-card";
+import SectionOverlay from "../components/section-overlay";
 
 const AboutUsPage = () => {
   return (
@@ -27,6 +28,14 @@ const AboutUsPage = () => {
         heading="Evolution System"
         para1="We have a modern STUDIO platform, where we can edit content and adjust our content for optimal display on any desktop and mobile device. The page loading speed is also optimized. Get to know our office and where to visit us. This is just an example of information about our activities."
         para2="We are a company that has been operating on the market for over 20 years. We have created many startup projects during this time. Our office is a process that we create all the time"
+      />
+      <SectionOverlay
+        bigText="01"
+        heading1="Daily Update"
+        para1="The frequency of adding new articles is very important and builds confidence that we will see something new with every visit."
+        heading2="Only reliable information"
+        para2="We try to provide only certain information, learn from experience and show our best side."
+        overlayImgUrl="https://images.unsplash.com/photo-1618020211086-3d63c84f85aa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1974&q=80"
       />
     </div>
   );

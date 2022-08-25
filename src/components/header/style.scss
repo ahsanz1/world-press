@@ -8,4 +8,8 @@
       height: 66px;
     }
   }
+
+  ::-webkit-scrollbar {
+    width: 5px !important;
+  }
 }
